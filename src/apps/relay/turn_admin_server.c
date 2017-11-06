@@ -107,7 +107,7 @@ struct cli_session {
 
 #define CLI_PASSWORD_TRY_NUMBER (5)
 
-static const char *CLI_HELP_STR[] = 
+static const char *CLI_HELP_STR[] =
   {"",
    "  ?, h, help - print this text",
    "",
@@ -1521,6 +1521,7 @@ static void https_finish_page(struct str_buffer *sb, ioa_socket_handle s, int cc
 	if(cclose) {
 		send_str_from_ioa_socket_tcp(s,"Connection: close");
 	}
+	send_str_from_ioa_socket_tcp(s,"Access-Control-Allow-Origin: *.bramble.io\r\n");
 	send_str_from_ioa_socket_tcp(s,"Content-Type: text/html; charset=UTF-8\r\nContent-Length: ");
 
 	send_ulong_from_ioa_socket_tcp(s,str_buffer_get_str_len(sb));
